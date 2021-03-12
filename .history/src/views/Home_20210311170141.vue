@@ -39,6 +39,6 @@ export default {
 }
 .main {
   width: calc(100% - 220px);
-  min-width: 600px;
+  min-width: 500px;
 }
 </style>

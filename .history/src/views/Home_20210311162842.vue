@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <SideBar />
-    <div class="main">
+    <div class="nav">
       <NavigationBar />
       <router-view />
       <!-- <Search /> -->
@@ -37,8 +37,7 @@ export default {
     color: white; */
   overflow: hidden;
 }
-.main {
+.nav {
   width: calc(100% - 220px);
-  min-width: 600px;
 }
 </style>

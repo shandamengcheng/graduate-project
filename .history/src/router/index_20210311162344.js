@@ -18,11 +18,6 @@ const routes = [
     component: Home,
     children:[
       {
-        path: '/',
-        name: 'Search',
-        component: Search,
-      },
-      {
         path: 'search',
         name: 'Search',
         component: Search,

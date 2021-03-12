@@ -1,20 +1,18 @@
 <template>
   <div class="home">
     <SideBar />
-    <div class="main">
+    <div class="nav">
       <NavigationBar />
-      <router-view />
-      <!-- <Search /> -->
     </div>
+    <router-view />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import Login from "@/views/Login";
-import SideBar from "@/components/SideBar";
-import NavigationBar from "@/components/NavigationBar";
-import Search from "@/components/Search";
+import SideBar from "@/views/SideBar";
+import NavigationBar from "@/views/NavigationBar";
 
 export default {
   name: "Home",
@@ -22,7 +20,6 @@ export default {
     Login,
     SideBar,
     NavigationBar,
-    Search,
   },
 };
 </script>
@@ -31,14 +28,11 @@ export default {
 .home {
   min-height: 100%;
   width: 100%;
-  display: flex;
-  flex-direction: row;
   /* background-color: #2d3a4b;
     color: white; */
   overflow: hidden;
 }
-.main {
+.nav {
   width: calc(100% - 220px);
-  min-width: 600px;
 }
 </style>

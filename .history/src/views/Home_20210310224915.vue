@@ -1,0 +1,30 @@
+<template>
+  <div class="home">
+    <SideBar />
+    <router-view />
+  </div>
+</template>
+
+<script>
+// @ is an alias to /src
+import Login from "@/views/Login";
+import SideBar from "@/views/SideBar";
+
+export default {
+  name: 'Home',
+  components: {
+    Login,
+    SideBar,
+  }
+}
+</script>
+
+<style scoped>
+  .home {
+    min-height: 100%;
+    width: 100%;
+    /* background-color: #2d3a4b;
+    color: white; */
+    overflow: hidden;
+  }
+</style>

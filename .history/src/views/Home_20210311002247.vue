@@ -1,11 +1,10 @@
 <template>
   <div class="home">
     <SideBar />
-    <div class="main">
+    <div class="nav">
       <NavigationBar />
-      <router-view />
-      <!-- <Search /> -->
     </div>
+    <router-view />
   </div>
 </template>
 
@@ -14,7 +13,6 @@
 import Login from "@/views/Login";
 import SideBar from "@/components/SideBar";
 import NavigationBar from "@/components/NavigationBar";
-import Search from "@/components/Search";
 
 export default {
   name: "Home",
@@ -22,7 +20,6 @@ export default {
     Login,
     SideBar,
     NavigationBar,
-    Search,
   },
 };
 </script>
@@ -37,8 +34,7 @@ export default {
     color: white; */
   overflow: hidden;
 }
-.main {
+.nav {
   width: calc(100% - 220px);
-  min-width: 600px;
 }
 </style>
