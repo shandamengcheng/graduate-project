@@ -24,11 +24,6 @@ export default {
     NavigationBar,
     Search,
   },
-  data() {
-    return {
-      // isShowMenu: false, // 用来控制头像旁menu的隐藏
-    }
-  },
   methods: {
     navigationToView: function(path) {
       if (location.pathname == `/home/${path}`) return;

@@ -1,7 +1,7 @@
 <template>
   <div class="search">
     <input type="search" />
-    <img src="@/assets/search.png" />
+    <img src="@/assets/search.png" >
   </div>
 </template>
 
@@ -18,27 +18,25 @@ export default {
   height: 30px;
   margin-top: 10px;
   text-align: left;
+  font-size: 0;
 }
 .search input {
   display: inline-block;
   width: 80%;
   height: 30px;
   line-height: 30px;
+  /* margin: auto; */
   border-radius: 10px;
   outline: none;
   font-size: 20px;
   padding: 0 5px;
   box-sizing: border-box;
-  vertical-align: top;
-}
+  vertical-align: baseline;
+} 
 .search img {
   display: inline-block;
   width: 30px;
   height: 30px;
-  margin-left: 10px;
-  cursor: pointer;
+  margin-right: 5px;
 }
-/* img:active {
-  box-shadow: 4px 3px 5px 2px rgb(180, 178, 178);
-} */
 </style>

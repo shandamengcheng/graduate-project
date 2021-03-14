@@ -10,7 +10,7 @@ export default {
   methods: {
     passDataToSidebar: function(event) {
       const data = event.currentTarget.getAttribute('id');
-      this.$emit('passData', data);
+      console.log(data);
     }
   }
 }

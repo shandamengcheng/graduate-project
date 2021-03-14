@@ -26,7 +26,7 @@ export default {
   },
   data() {
     return {
-      // isShowMenu: false, // 用来控制头像旁menu的隐藏
+      isShowMenu: false, // 用来控制头像旁menu的隐藏
     }
   },
   methods: {

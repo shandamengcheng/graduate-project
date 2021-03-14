@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar-item" @click="passDataToSidebar($event)">
+  <div class="sidebar-item" @click="passDataToSidebar('aaa',$event)">
     <slot>默认列表项</slot>
   </div>
 </template>
@@ -8,9 +8,8 @@
 export default {
   name: "SideBarItem",
   methods: {
-    passDataToSidebar: function(event) {
-      const data = event.currentTarget.getAttribute('id');
-      this.$emit('passData', data);
+    passDataToSidebar: function(value, event) {
+      console.log(event.currentTarget, value);
     }
   }
 }

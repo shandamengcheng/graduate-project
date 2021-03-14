@@ -31,6 +31,9 @@ export default {
   box-sizing: border-box;
   vertical-align: top;
 }
+input:focus {
+  outline: blue;
+}
 .search img {
   display: inline-block;
   width: 30px;

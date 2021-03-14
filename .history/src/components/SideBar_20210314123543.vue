@@ -1,19 +1,19 @@
 <template>
   <div class="sidebar">
-    <SideBarItem id="search" @passData="passPathToHome">
-      <img src="@/assets/class.png" />
+    <SideBarItem>
+      <img src="@/assets/class.png">
       <div>全校课表查询</div>
     </SideBarItem>
-    <SideBarItem id="record" @passData="passPathToHome">
-      <img src="@/assets/sheet.png" />
+    <SideBarItem>
+      <img src="@/assets/sheet.png">
       <div>听课表格录入</div>
     </SideBarItem>
-    <SideBarItem id="report" @passData="passPathToHome">
-      <img src="@/assets/report.png" />
+    <SideBarItem>
+      <img src="@/assets/report.png">
       <div>年度报告提交</div>
     </SideBarItem>
-    <SideBarItem id="plan" @passData="passPathToHome">
-      <img src="@/assets/class.png" />
+     <SideBarItem>
+      <img src="@/assets/class.png">
       <div>我的听课计划</div>
     </SideBarItem>
   </div>
@@ -27,12 +27,8 @@ export default {
   components: {
     SideBarItem,
   },
-  methods: {
-    passPathToHome: function(path) {
-      this.$emit('changeView', path)
-    }
-  },
-};
+
+}
 </script>
 
 <style scoped>

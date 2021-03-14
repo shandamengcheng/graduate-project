@@ -9,8 +9,7 @@ export default {
   name: "SideBarItem",
   methods: {
     passDataToSidebar: function(event) {
-      const data = event.currentTarget.getAttribute('id');
-      this.$emit('passData', data);
+      console.log(event.currentTarget, value);
     }
   }
 }

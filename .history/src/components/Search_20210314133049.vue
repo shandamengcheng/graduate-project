@@ -1,7 +1,7 @@
 <template>
   <div class="search">
     <input type="search" />
-    <img src="@/assets/search.png" />
+    <img src="@/assets/search.png" >
   </div>
 </template>
 
@@ -30,7 +30,7 @@ export default {
   padding: 0 5px;
   box-sizing: border-box;
   vertical-align: top;
-}
+} 
 .search img {
   display: inline-block;
   width: 30px;

@@ -1,8 +1,7 @@
 <template>
   <div class="navbar">
-    <!-- <div class="title">控制面板</div> -->
     <img src="@/assets/avatar.png" class="avatar-img" />
-    <img src="@/assets/arrow.png" class="avatar-submenu" @click="toggleMenu" />
+    <img src="@/assets/arrow.png" class="avatar-submenu" @click="toggleMenu"/>
     <ul class="avatar-menu" v-if="showMenu" @click="toggleMenu">
       <li class="home" @click="navigateToPage('home')">Home</li>
       <li @click="navigateToPage('login')">Log Out</li>
@@ -16,7 +15,7 @@ export default {
   data() {
     return {
       showMenu: false,
-    };
+    }
   },
   methods: {
     toggleMenu: function() {
@@ -25,8 +24,8 @@ export default {
     navigateToPage: function(path) {
       if (location.pathname == `/${path}`) return;
       this.$router.push(`/${path}`);
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -69,9 +68,4 @@ export default {
 .home {
   border-bottom: 0.5px solid rgba(180, 178, 178, 0.5);
 }
-/* .title {
-  width: 10%;
-  background: pink;
-  line-height: 50px;
-} */
 </style>
