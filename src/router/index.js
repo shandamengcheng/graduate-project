@@ -6,6 +6,7 @@ import Search from '../components/Search.vue';
 import Record from '../components/Record.vue';
 import Report from '../components/Report.vue';
 import Plan from '../components/Plan.vue';
+// import Print from '../components/Print.vue';
 
 Vue.use(VueRouter)
 
@@ -51,7 +52,12 @@ const routes = [
         component: Plan
       },
     ]
-  }
+  },
+  // {
+  //   path: '/print',
+  //   name: 'Print',
+  //   component: Print
+  // },
 ]
 
 const router = new VueRouter({

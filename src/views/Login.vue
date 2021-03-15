@@ -7,7 +7,7 @@
       <div class="login-item">
         <div class="login-item_content">
           <span class="svg-container">
-            测试
+            <img src="@/assets/user.png" />
           </span>
           <div class="login-input">
             <input type="text" placeholder="Username" />
@@ -17,6 +17,7 @@
       <div class="login-item">
         <div class="login-item_content">
           <span class="svg-container">
+            <img src="@/assets/psd.png" />
           </span>
           <div class="login-input">
             <input type="password" placeholder="Password" />
@@ -85,18 +86,20 @@ export default {
   position: relative;
   font-size: 14px;
   padding: 0;
+  display: flex;
+  justify-content: flex-start;
 }
 
 .svg-container {
-  /* padding: 6px 5px 6px 15px; */
   color: #889aa4;
+  width: 20px;
+  margin: 15px 10px;
+  height: 20px;
+}
+.svg-container img {
   vertical-align: top;
-  /* text-align: left; */
-  margin: 0;
-  width: 10%;
-  height: 52px;
-  display: inline-block;
-  /* line-height: 40px; */
+  width: 100%;
+  height: 100%;
 }
 
 .login-input {

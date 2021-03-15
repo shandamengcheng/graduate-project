@@ -3,8 +3,9 @@
     <SideBar @changeView="navigationToView" />
     <div class="main">
       <NavigationBar />
-      <router-view />
-      <!-- <Search /> -->
+      <keep-alive>
+        <router-view />
+      </keep-alive>
     </div>
   </div>
 </template>
@@ -27,7 +28,7 @@ export default {
   data() {
     return {
       // isShowMenu: false, // 用来控制头像旁menu的隐藏
-    }
+    };
   },
   methods: {
     navigationToView: function(path) {
@@ -51,5 +52,7 @@ export default {
 .main {
   width: calc(100% - 220px);
   min-width: 600px;
+  height: 100vh;
+  max-height: 100vh;
 }
 </style>
