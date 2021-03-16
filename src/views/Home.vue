@@ -39,9 +39,9 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .home {
-  min-height: 100%;
+  min-height: 600px;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -54,5 +54,20 @@ export default {
   min-width: 600px;
   height: 100vh;
   max-height: 100vh;
+}
+/* 设置滚动条的样式 */
+::-webkit-scrollbar {
+  width: 0px;
+}
+/* 滚动槽 */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px #f5f5f5;
+  border-radius: 10px;
+}
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 0 6px #f5f5f5;
 }
 </style>
