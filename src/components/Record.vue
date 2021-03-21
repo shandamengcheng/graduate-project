@@ -727,13 +727,35 @@ export default {
       switch (type) {
         case "实验课": {
           const first = infoList.shift();
-          infoList.unshift(first, [
+          infoList.unshift([
             {
               name: "实验项目名称",
               type: "text",
               proName: "projectName",
             },
           ]);
+          infoList.unshift(first);
+        } break;
+        case "理论课":
+        case "学生汇报课":
+        case "体育课":
+        case "公益课程理论课":
+        case "公益课程实践课": {
+          let length = infoList.length;
+          let pos;
+          for (let i = 0; i < length; i++) {
+            if (
+              Array.isArray(infoList[i]) &&
+              infoList[i].length === 1 &&
+              infoList[i][0].name == "实验项目名称"
+            ) {
+              pos = i;
+              break;
+            }
+          }
+          if (pos) {
+            infoList.splice(pos, 1);
+          }
         }
       }
       this.infoData.classtype = type;
