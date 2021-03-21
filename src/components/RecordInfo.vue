@@ -86,7 +86,7 @@ li .info-row {
   justify-content: center;
 }
 .info-row span {
-  width: 50%;
+  width: 40%;
 }
 .base-info .checkbox {
   width: 80%;
