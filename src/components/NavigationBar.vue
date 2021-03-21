@@ -4,7 +4,7 @@
     <img src="@/assets/avatar.png" class="avatar-img" />
     <img src="@/assets/arrow.png" class="avatar-submenu" @click="toggleMenu" />
     <ul class="avatar-menu" v-if="showMenu" @click="toggleMenu">
-      <li class="home" @click="navigateToPage('home')">Home</li>
+      <li class="path-home" @click="navigateToPage('home')">Home</li>
       <li @click="navigateToPage('login')">Log Out</li>
     </ul>
   </div>
@@ -56,7 +56,9 @@ export default {
   top: 60px;
   right: 5px;
   width: 90px;
+  height: 100px;
   border: 0.5px solid rgba(180, 178, 178, 0.5);
+  background: #e4eddb;
   list-style-type: none;
   padding: 0;
   border-radius: 10px;
@@ -66,12 +68,9 @@ export default {
   line-height: 50px;
   cursor: pointer;
 }
-.home {
+.path-home {
   border-bottom: 0.5px solid rgba(180, 178, 178, 0.5);
+  position: relative;
+  z-index: 100;
 }
-/* .title {
-  width: 10%;
-  background: pink;
-  line-height: 50px;
-} */
 </style>

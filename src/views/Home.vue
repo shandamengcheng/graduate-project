@@ -48,6 +48,8 @@ export default {
   /* background-color: #2d3a4b;
     color: white; */
   overflow: hidden;
+  position: relative;
+  z-index: 0;
 }
 .main {
   width: calc(100% - 220px);

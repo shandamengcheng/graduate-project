@@ -9,7 +9,7 @@
   margin: 0;
   padding: 0;
   -webkit-box-sizing: inherit;
-  box-sizing: inherit;
+  box-sizing: border-box;
 }
 
 #app, html, body{
@@ -22,4 +22,11 @@
   overflow: hidden;
 }
 
+textarea, input {
+  border-radius: 5px;
+  font-size: 15px;
+}
+textarea {
+  text-indent: 4ch;
+}
 </style>
