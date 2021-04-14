@@ -17,7 +17,8 @@
       </div>
       <img src="@/assets/search.png" />
       <div class="search-items">
-          <SearchItems :dataList="classList" />
+          <!-- <SearchItems :dataList="classList" /> -->
+          <h1>未搜索到相应的数据</h1>
         </div>
     </div>
   </div>
@@ -38,91 +39,106 @@ export default {
       classList: [
         {
           teacher: "Jona",
-          classname: "测试一下",
+          classname: "数据结构与算法",
+          classtime: '周三12周三89',
           classroom: "D123",
           company: "计算机系",
         },
         {
           teacher: "Jona1",
-          classname: "测试一下",
+          classname: "数据结构与算法",
+          classtime: '周三12',
           classroom: "D123",
           company: "计算机系",
         },
         {
           teacher: "Jona2",
-          classname: "测试一下",
+          classname: "数据结构与算法",
+          classtime: '周三12',
           classroom: "D123",
           company: "计算机系",
         },
         {
           teacher: "Jona3",
-          classname: "测试一下",
+          classname: "数据结构与算法",
+          classtime: '周三12',
           classroom: "D123",
           company: "计算机系",
         },
         {
           teacher: "Jona4",
-          classname: "测试一下",
+          classname: "数据结构与算法",
+          classtime: '周三12',
           classroom: "D123",
           company: "计算机系",
         },
         {
           teacher: "Jona5",
-          classname: "测试一下测试一下测试一下测试一下测试一下",
+          classname: "操作系统",
+          classtime: '周三12',
           classroom: "D123",
           company: "计算机系",
         },
         {
           teacher: "Jona6",
-          classname: "测试一下",
+          classname: "数据结构与算法",
+          classtime: '周三12',
           classroom: "D123",
           company: "计算机系",
         },
         {
           teacher: "Jona7",
-          classname: "测试一下",
+          classname: "数据结构与算法",
+          classtime: '周三12',
           classroom: "D123",
           company: "计算机系",
         },
         {
           teacher: "Jona8",
-          classname: "测试一下",
+          classname: "数据结构与算法",
+          classtime: '周三12',
           classroom: "D123",
           company: "计算机系",
         },
         {
           teacher: "Jona9",
-          classname: "测试一下",
+          classname: "数据结构与算法",
+          classtime: '周三12',
           classroom: "D123",
           company: "计算机系",
         },
         {
           teacher: "Jona0",
-          classname: "测试一下",
+          classname: "数据结构与算法",
+          classtime: '周三12',
           classroom: "D123",
           company: "计算机系",
         },
         {
           teacher: "Jona11",
-          classname: "测试一下",
+          classname: "数据结构与算法",
+          classtime: '周三12',
           classroom: "D123",
           company: "计算机系",
         },
         {
           teacher: "Jona12",
-          classname: "测试一下",
+          classname: "数据结构与算法",
+          classtime: '周三12',
           classroom: "D123",
           company: "计算机系",
         },
         {
           teacher: "Jona13",
-          classname: "测试一下",
+          classname: "数据结构与算法",
+          classtime: '周三12',
           classroom: "D123",
           company: "计算机系",
         },
         {
           teacher: "Jona14",
-          classname: "测试一下",
+          classname: "数据结构与算法",
+          classtime: '周三12',
           classroom: "D123",
           company: "计算机系",
         },
@@ -183,6 +199,11 @@ export default {
   margin: auto;
   box-sizing: border-box;
   overflow: auto;
+}
+.search-items h1 {
+  text-align: center;
+  color: gray;
+  opacity: 0.8;
 }
 .search-choice {
   width: 80px;

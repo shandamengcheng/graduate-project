@@ -10,7 +10,7 @@
             <img src="@/assets/user.png" />
           </span>
           <div class="login-input">
-            <input type="text" placeholder="Username" />
+            <input type="text" placeholder="Username" v-model="username" />
           </div>
         </div>
       </div>
@@ -20,7 +20,7 @@
             <img src="@/assets/psd.png" />
           </span>
           <div class="login-input">
-            <input type="password" placeholder="Password" />
+            <input type="password" placeholder="Password" v-model="password" />
           </div>
         </div>
       </div>
@@ -30,17 +30,39 @@
 </template>
 
 <script>
-
 export default {
-  name: 'Login',
-  components: {
+  name: "Login",
+  components: {},
+  data() {
+    return {
+      password: "",
+      username: "",
+    };
   },
   methods: {
     linkToHome: function() {
-      this.$router.push('./home');
-    }
-  }
-}
+      if (this.username.trim() == "" || this.password.trim() == "") {
+        alert("请先把用户名或密码填写完整!");
+        return;
+      }
+      let instance = this;
+      instance.$axios({
+        method: "post",
+        url: "http://localhost:8000/login",
+        data: {
+          password: this.password,
+          username: this.username,
+        },
+      }).then(function(response) {
+        if (response.data == true) {
+          instance.$router.push("./home");
+        } else {
+          alert("用户名或密码错误");
+        }
+      });
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -139,8 +161,8 @@ export default {
   box-sizing: border-box;
   outline: 0;
   margin: 0;
-  -webkit-transition: .1s;
-  transition: .1s;
+  -webkit-transition: 0.1s;
+  transition: 0.1s;
   font-weight: 500;
   padding: 12px 20px;
   font-size: 20px;

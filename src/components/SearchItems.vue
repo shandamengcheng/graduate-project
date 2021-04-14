@@ -3,6 +3,7 @@
     <div v-for="(item, index) in dataList" class="item" :key="index">
       <div>{{ item.teacher }}</div>
       <div>{{ item.classname }}</div>
+      <div>{{ item.classtime }}</div>
       <div>{{ item.classroom }}</div>
       <div>{{ item.company }}</div>
     </div>
@@ -32,7 +33,7 @@ export default {
   justify-content: space-between;
 }
 .item div {
-  width: 24%;
+  width: 20%;
   /* border-right: 0.5px solid rgb(180, 178, 178); */
   overflow: hidden;
   text-overflow: ellipsis;

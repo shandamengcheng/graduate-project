@@ -49,8 +49,8 @@
           :followUpData="followUpData"
         />
       </Header>
+      <button @click="uploadRecordToServer" class="uploadSheetData">上传数据</button>
     </div>
-    <!-- <button @click="uploadRecordToServer">show</button> -->
   </div>
 </template>
 
@@ -725,17 +725,19 @@ export default {
       const type = e.target.value;
       const infoList = this.infoData.infoList;
       switch (type) {
-        case "实验课": {
-          const first = infoList.shift();
-          infoList.unshift([
-            {
-              name: "实验项目名称",
-              type: "text",
-              proName: "projectName",
-            },
-          ]);
-          infoList.unshift(first);
-        } break;
+        case "实验课":
+          {
+            const first = infoList.shift();
+            infoList.unshift([
+              {
+                name: "实验项目名称",
+                type: "text",
+                proName: "projectName",
+              },
+            ]);
+            infoList.unshift(first);
+          }
+          break;
         case "理论课":
         case "学生汇报课":
         case "体育课":
@@ -773,15 +775,26 @@ export default {
   justify-content: space-evenly;
 }
 .class-type {
-  /* width: 10%; */
   min-width: 120px;
   height: 30px;
-  border: 1px solid blue;
+  outline: none;
+  border: 0.5px solid rgba(180, 178, 178, 0.5);
 }
 .record-main {
   width: 80%;
   height: 100%;
   overflow: auto;
-  border: 1px solid blue;
+  border: 0.5px solid rgba(180, 178, 178, 0.5);
+}
+.uploadSheetData {
+  width: 40%;
+  min-width: 50px;
+  outline: none;
+  margin: 5px auto;
+  height: 50px;
+  font-size: 1em;
+  cursor: pointer;
+  color: white;
+  background: #304156;
 }
 </style>
