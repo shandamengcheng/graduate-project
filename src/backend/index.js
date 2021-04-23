@@ -46,12 +46,11 @@ app.use(bodyParser.json());
 // });
 
 app.post("/login", function(req, res) {
-  connection.query("SELECT * from user_admin", function(error, result) {
-    console.log("The solution is: ", result);
+  connection.query("SELECT * from teacher_info", function(error, result) {
     let admin = false;
     let body = req.body;
     admin = result.some((val, index, result) => {
-      return val.user_name == body.username && val.user_pwd == body.password;
+      return val.user_name == body.Login_name && val.user_pwd == body.Login_password;
     });
     res.send(admin);
   });
