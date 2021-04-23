@@ -137,11 +137,7 @@ export default {
     printSheet: function() {
       this.isShowPreview = true;
       const prtContent = document.querySelector("#print-area");
-      const WinPrint = window.open(
-        "",
-        "mywindow",
-        "status=1,width=800,height=800"
-      );
+      const WinPrint = window.open("", "mywindow", "status=1,width=800,height=800");
       WinPrint.document.write("<html><head><title>Print</title>");
       WinPrint.document.write(`<style>
       h1 {
@@ -150,11 +146,7 @@ export default {
         max-width: 80vw;
         margin: auto;
       }
-      .first-line,
-      .second-line,
-      .thrid-line,
-      .forth-line,
-      .fifth-line {
+      .first-line, .second-line, .thrid-line, .forth-line, .fifth-line {
         min-width: 600px;
         max-width: 90vw;
         display: flex;
@@ -164,8 +156,7 @@ export default {
         font-size: 20px;
         margin-top: 20px;
       }
-      .first-line > *,
-      .second-line > * {
+      .first-line > *, .second-line > * {
         height: 30px;
         line-height: 30px;
         border-radius: 5px;
@@ -206,9 +197,6 @@ export default {
       WinPrint.window.onload = function() {
         alert("填写完毕后，可以通过ctrl + P 进行打印");
       };
-      // WinPrint.window.onafterprint = function() {
-      //   WinPrint.close();
-      // }
     },
   },
 };

@@ -15,10 +15,11 @@
       <div class="input-container">
         <input type="search" v-model="searchKeywords" />
       </div>
-      <img src="@/assets/search.png" />
+      <!-- <img src="@/assets/search.png" /> -->
+      <button class="search-button"> </button>
       <div class="search-items">
           <!-- <SearchItems :dataList="classList" /> -->
-          <h1>未搜索到相应的数据</h1>
+          <h1 class="no-search-items">未搜索到相应的数据</h1>
         </div>
     </div>
   </div>
@@ -36,113 +37,114 @@ export default {
     return {
       searchChoice: "讲师",
       searchKeywords: "",
-      classList: [
-        {
-          teacher: "Jona",
-          classname: "数据结构与算法",
-          classtime: '周三12周三89',
-          classroom: "D123",
-          company: "计算机系",
-        },
-        {
-          teacher: "Jona1",
-          classname: "数据结构与算法",
-          classtime: '周三12',
-          classroom: "D123",
-          company: "计算机系",
-        },
-        {
-          teacher: "Jona2",
-          classname: "数据结构与算法",
-          classtime: '周三12',
-          classroom: "D123",
-          company: "计算机系",
-        },
-        {
-          teacher: "Jona3",
-          classname: "数据结构与算法",
-          classtime: '周三12',
-          classroom: "D123",
-          company: "计算机系",
-        },
-        {
-          teacher: "Jona4",
-          classname: "数据结构与算法",
-          classtime: '周三12',
-          classroom: "D123",
-          company: "计算机系",
-        },
-        {
-          teacher: "Jona5",
-          classname: "操作系统",
-          classtime: '周三12',
-          classroom: "D123",
-          company: "计算机系",
-        },
-        {
-          teacher: "Jona6",
-          classname: "数据结构与算法",
-          classtime: '周三12',
-          classroom: "D123",
-          company: "计算机系",
-        },
-        {
-          teacher: "Jona7",
-          classname: "数据结构与算法",
-          classtime: '周三12',
-          classroom: "D123",
-          company: "计算机系",
-        },
-        {
-          teacher: "Jona8",
-          classname: "数据结构与算法",
-          classtime: '周三12',
-          classroom: "D123",
-          company: "计算机系",
-        },
-        {
-          teacher: "Jona9",
-          classname: "数据结构与算法",
-          classtime: '周三12',
-          classroom: "D123",
-          company: "计算机系",
-        },
-        {
-          teacher: "Jona0",
-          classname: "数据结构与算法",
-          classtime: '周三12',
-          classroom: "D123",
-          company: "计算机系",
-        },
-        {
-          teacher: "Jona11",
-          classname: "数据结构与算法",
-          classtime: '周三12',
-          classroom: "D123",
-          company: "计算机系",
-        },
-        {
-          teacher: "Jona12",
-          classname: "数据结构与算法",
-          classtime: '周三12',
-          classroom: "D123",
-          company: "计算机系",
-        },
-        {
-          teacher: "Jona13",
-          classname: "数据结构与算法",
-          classtime: '周三12',
-          classroom: "D123",
-          company: "计算机系",
-        },
-        {
-          teacher: "Jona14",
-          classname: "数据结构与算法",
-          classtime: '周三12',
-          classroom: "D123",
-          company: "计算机系",
-        },
-      ],
+      classList: [],
+      // classList: [
+      //   {
+      //     teacher: "Jona",
+      //     classname: "数据结构与算法",
+      //     classtime: '周三12周三89',
+      //     classroom: "D123",
+      //     company: "计算机系",
+      //   },
+      //   {
+      //     teacher: "Jona1",
+      //     classname: "数据结构与算法",
+      //     classtime: '周三12',
+      //     classroom: "D123",
+      //     company: "计算机系",
+      //   },
+      //   {
+      //     teacher: "Jona2",
+      //     classname: "数据结构与算法",
+      //     classtime: '周三12',
+      //     classroom: "D123",
+      //     company: "计算机系",
+      //   },
+      //   {
+      //     teacher: "Jona3",
+      //     classname: "数据结构与算法",
+      //     classtime: '周三12',
+      //     classroom: "D123",
+      //     company: "计算机系",
+      //   },
+      //   {
+      //     teacher: "Jona4",
+      //     classname: "数据结构与算法",
+      //     classtime: '周三12',
+      //     classroom: "D123",
+      //     company: "计算机系",
+      //   },
+      //   {
+      //     teacher: "Jona5",
+      //     classname: "操作系统",
+      //     classtime: '周三12',
+      //     classroom: "D123",
+      //     company: "计算机系",
+      //   },
+      //   {
+      //     teacher: "Jona6",
+      //     classname: "数据结构与算法",
+      //     classtime: '周三12',
+      //     classroom: "D123",
+      //     company: "计算机系",
+      //   },
+      //   {
+      //     teacher: "Jona7",
+      //     classname: "数据结构与算法",
+      //     classtime: '周三12',
+      //     classroom: "D123",
+      //     company: "计算机系",
+      //   },
+      //   {
+      //     teacher: "Jona8",
+      //     classname: "数据结构与算法",
+      //     classtime: '周三12',
+      //     classroom: "D123",
+      //     company: "计算机系",
+      //   },
+      //   {
+      //     teacher: "Jona9",
+      //     classname: "数据结构与算法",
+      //     classtime: '周三12',
+      //     classroom: "D123",
+      //     company: "计算机系",
+      //   },
+      //   {
+      //     teacher: "Jona0",
+      //     classname: "数据结构与算法",
+      //     classtime: '周三12',
+      //     classroom: "D123",
+      //     company: "计算机系",
+      //   },
+      //   {
+      //     teacher: "Jona11",
+      //     classname: "数据结构与算法",
+      //     classtime: '周三12',
+      //     classroom: "D123",
+      //     company: "计算机系",
+      //   },
+      //   {
+      //     teacher: "Jona12",
+      //     classname: "数据结构与算法",
+      //     classtime: '周三12',
+      //     classroom: "D123",
+      //     company: "计算机系",
+      //   },
+      //   {
+      //     teacher: "Jona13",
+      //     classname: "数据结构与算法",
+      //     classtime: '周三12',
+      //     classroom: "D123",
+      //     company: "计算机系",
+      //   },
+      //   {
+      //     teacher: "Jona14",
+      //     classname: "数据结构与算法",
+      //     classtime: '周三12',
+      //     classroom: "D123",
+      //     company: "计算机系",
+      //   },
+      // ],
     };
   },
   methods: {},
@@ -183,12 +185,14 @@ export default {
   border-radius: 5px;
   outline: none;
 }
-.search-input img {
+.search-input .search-button {
   display: inline-block;
   width: 40px;
   height: 40px;
   margin-left: 10px;
   cursor: pointer;
+  outline: none;
+  background: url('../assets/search.png') no-repeat 40px 40px;
 }
 .search-items {
   width:80%;
@@ -200,10 +204,11 @@ export default {
   box-sizing: border-box;
   overflow: auto;
 }
-.search-items h1 {
+.no-search-items {
   text-align: center;
   color: gray;
   opacity: 0.8;
+  display: none;
 }
 .search-choice {
   width: 80px;
