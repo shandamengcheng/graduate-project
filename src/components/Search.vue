@@ -16,11 +16,20 @@
         <input type="search" v-model="searchKeywords" />
       </div>
       <!-- <img src="@/assets/search.png" /> -->
-      <button class="search-button"> </button>
+      <button class="search-button" @click="searchItems">搜索</button>
       <div class="search-items">
-          <!-- <SearchItems :dataList="classList" /> -->
-          <h1 class="no-search-items">未搜索到相应的数据</h1>
-        </div>
+        <SearchItems
+          :dataList="classArr"
+          class="not-show"
+          :class="{ show: isShowItems && isInputNotEmpty }"
+        />
+        <h1
+          class="no-search-items not-show"
+          :class="{ show: isShowTips && isInputNotEmpty }"
+        >
+          未搜索到相应的数据
+        </h1>
+      </div>
     </div>
   </div>
 </template>
@@ -37,117 +46,57 @@ export default {
     return {
       searchChoice: "讲师",
       searchKeywords: "",
-      classList: [],
-      // classList: [
-      //   {
-      //     teacher: "Jona",
-      //     classname: "数据结构与算法",
-      //     classtime: '周三12周三89',
-      //     classroom: "D123",
-      //     company: "计算机系",
-      //   },
-      //   {
-      //     teacher: "Jona1",
-      //     classname: "数据结构与算法",
-      //     classtime: '周三12',
-      //     classroom: "D123",
-      //     company: "计算机系",
-      //   },
-      //   {
-      //     teacher: "Jona2",
-      //     classname: "数据结构与算法",
-      //     classtime: '周三12',
-      //     classroom: "D123",
-      //     company: "计算机系",
-      //   },
-      //   {
-      //     teacher: "Jona3",
-      //     classname: "数据结构与算法",
-      //     classtime: '周三12',
-      //     classroom: "D123",
-      //     company: "计算机系",
-      //   },
-      //   {
-      //     teacher: "Jona4",
-      //     classname: "数据结构与算法",
-      //     classtime: '周三12',
-      //     classroom: "D123",
-      //     company: "计算机系",
-      //   },
-      //   {
-      //     teacher: "Jona5",
-      //     classname: "操作系统",
-      //     classtime: '周三12',
-      //     classroom: "D123",
-      //     company: "计算机系",
-      //   },
-      //   {
-      //     teacher: "Jona6",
-      //     classname: "数据结构与算法",
-      //     classtime: '周三12',
-      //     classroom: "D123",
-      //     company: "计算机系",
-      //   },
-      //   {
-      //     teacher: "Jona7",
-      //     classname: "数据结构与算法",
-      //     classtime: '周三12',
-      //     classroom: "D123",
-      //     company: "计算机系",
-      //   },
-      //   {
-      //     teacher: "Jona8",
-      //     classname: "数据结构与算法",
-      //     classtime: '周三12',
-      //     classroom: "D123",
-      //     company: "计算机系",
-      //   },
-      //   {
-      //     teacher: "Jona9",
-      //     classname: "数据结构与算法",
-      //     classtime: '周三12',
-      //     classroom: "D123",
-      //     company: "计算机系",
-      //   },
-      //   {
-      //     teacher: "Jona0",
-      //     classname: "数据结构与算法",
-      //     classtime: '周三12',
-      //     classroom: "D123",
-      //     company: "计算机系",
-      //   },
-      //   {
-      //     teacher: "Jona11",
-      //     classname: "数据结构与算法",
-      //     classtime: '周三12',
-      //     classroom: "D123",
-      //     company: "计算机系",
-      //   },
-      //   {
-      //     teacher: "Jona12",
-      //     classname: "数据结构与算法",
-      //     classtime: '周三12',
-      //     classroom: "D123",
-      //     company: "计算机系",
-      //   },
-      //   {
-      //     teacher: "Jona13",
-      //     classname: "数据结构与算法",
-      //     classtime: '周三12',
-      //     classroom: "D123",
-      //     company: "计算机系",
-      //   },
-      //   {
-      //     teacher: "Jona14",
-      //     classname: "数据结构与算法",
-      //     classtime: '周三12',
-      //     classroom: "D123",
-      //     company: "计算机系",
-      //   },
-      // ],
+      classArr: [],
+      isShowTips: false,
+      isShowItems: false,
+      isInputNotEmpty: false,
     };
   },
-  methods: {},
+  watch: {
+    searchKeywords: function(val) {
+      console.log({ val })
+      if (val.trim().length > 0) {
+        this.isInputNotEmpty = true;
+      } else {
+        this.isInputNotEmpty = false;
+        this.classArr = [];
+        this.isShowTips = false;
+        this.isShowItems = false;
+      }
+    },
+  },
+  methods: {
+    searchItems: function() {
+      const values = {
+        讲师: "Class_teacher",
+        开课单位: "Class_starting_unit",
+        课程名: "Class_name",
+        教室: "Class_room",
+      };
+      if (this.searchChoice.trim() == "") {
+        return;
+      }
+      let searchId = values[this.searchChoice].split("_").reverse()[0];
+      // console.log(this.searchChoice, this.searchKeywords);
+      this.$axios({
+        method: "post",
+        url: `http://localhost:8000/search:${searchId}`,
+        data: {
+          key: values[this.searchChoice],
+          keyWord: this.searchKeywords,
+        },
+      }).then((res) => {
+        if (res.data.length == 0) {
+          this.isShowItems = false;
+          this.isShowTips = true;
+        } else {
+          this.isShowItems = true;
+          this.isShowTips = false;
+          this.classArr = res.data;
+        }
+      });
+    },
+  },
 };
 </script>
 
@@ -192,10 +141,11 @@ export default {
   margin-left: 10px;
   cursor: pointer;
   outline: none;
-  background: url('../assets/search.png') no-repeat 40px 40px;
+  border-radius: 5px;
+  background: url("../assets/search.png") no-repeat 40px 40px;
 }
 .search-items {
-  width:80%;
+  width: 100%;
   max-height: 500px;
   position: absolute;
   top: 50px;
@@ -203,6 +153,12 @@ export default {
   margin: auto;
   box-sizing: border-box;
   overflow: auto;
+}
+.search-items .not-show {
+  display: none;
+}
+.search-items .show {
+  display: block;
 }
 .no-search-items {
   text-align: center;

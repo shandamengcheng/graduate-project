@@ -50,9 +50,42 @@ app.post("/login", function(req, res) {
     let admin = false;
     let body = req.body;
     admin = result.some((val, index, result) => {
-      return val.user_name == body.Login_name && val.user_pwd == body.Login_password;
+      return (
+        val.user_name == body.Login_name && val.user_pwd == body.Login_password
+      );
     });
     res.send(admin);
+  });
+});
+
+// 开课单位
+app.post("/search:unit", function(req, res) {
+  let body = req.body;
+  console.log(body)
+  connection.query("SELECT * from class_info where Class_starting_unit = ?", body.keyWord, function(error, result) {
+    console.log(result);
+    res.send(result);
+  });
+});
+// 教师
+app.post("/search:teacher", function(req, res) {
+  let body = req.body;
+  connection.query("SELECT * from class_info where Class_teacher = ?", body.keyWord, function(error, result) {
+    res.send(result);
+  });
+});
+// 教室
+app.post("/search:room", function(req, res) {
+  let body = req.body;
+  connection.query("SELECT * from class_info where Class_room = ?", body.keyWord, function(error, result) {
+    res.send(result);
+  });
+});
+// 课程名
+app.post("/search:name", function(req, res) {
+  let body = req.body;
+  connection.query("SELECT * from class_info where Class_name = ?", body.keyWord, function(error, result) {
+    res.send(result);
   });
 });
 
