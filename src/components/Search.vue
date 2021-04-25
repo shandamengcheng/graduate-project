@@ -54,7 +54,6 @@ export default {
   },
   watch: {
     searchKeywords: function(val) {
-      console.log({ val })
       if (val.trim().length > 0) {
         this.isInputNotEmpty = true;
       } else {
@@ -77,7 +76,6 @@ export default {
         return;
       }
       let searchId = values[this.searchChoice].split("_").reverse()[0];
-      // console.log(this.searchChoice, this.searchKeywords);
       this.$axios({
         method: "post",
         url: `http://localhost:8000/search:${searchId}`,
