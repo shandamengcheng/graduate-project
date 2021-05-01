@@ -6,7 +6,7 @@
       <div class="long-text">{{ item.Class_time }}</div>
       <div>{{ item.Class_room }}</div>
       <div>{{ item.Class_starting_unit }}</div>
-      <div><button @click="addToMyPlan">添加</button></div>
+      <div><button @click="addToMyPlan(item)">添加</button></div>
     </div>
   </div>
 </template>
@@ -18,8 +18,14 @@ export default {
     dataList: Array,
   },
   methods: {
-    addToMyPlan: () => {
-
+    addToMyPlan: function(info) {
+      this.$axios({
+        method: "post",
+        url: "http://localhost:8000/plan",
+        data: {...info},
+      }).then(res => {
+        console.log(res);
+      })
     }
   }
 };

@@ -16,7 +16,7 @@
     </select>
     <div class="record-main">
       <h1>汕头大学听课记录表</h1>
-      <RecordInfo :infoData="infoData" />
+      <RecordInfo :infoData="infoData" :infoList="infoList" />
       <Header :classtype="infoData.classtype">
         <Environment
           slot="environment"
@@ -49,7 +49,9 @@
           :followUpData="followUpData"
         />
       </Header>
-      <button @click="uploadRecordToServer" class="uploadSheetData">上传数据</button>
+      <button @click="uploadRecordToServer" class="uploadSheetData">
+        上传数据
+      </button>
     </div>
   </div>
 </template>
@@ -67,6 +69,67 @@ export default {
   data() {
     return {
       envir: "",
+      infoList: [
+        [
+          {
+            name: "开课单位",
+            type: "text",
+            proName: "company",
+          },
+          {
+            name: "课程名称",
+            type: "text",
+            proName: "classname",
+          },
+        ],
+        [
+          {
+            name: "开课班号",
+            type: "text",
+            proName: "classid",
+          },
+          {
+            name: "授课教师",
+            type: "text",
+            proName: "teacher",
+          },
+        ],
+        [
+          {
+            name: "听课时间",
+            type: "datetime-local",
+            proName: "classtime",
+          },
+          {
+            name: "地点",
+            type: "text",
+            proName: "classroom",
+          },
+        ],
+        [
+          {
+            name: "学生应到人数",
+            type: "number",
+            proName: "stu-all-number",
+          },
+          {
+            name: "学生实到人数",
+            type: "number",
+            proName: "stu-real-number",
+          },
+        ],
+        {
+          name: "听课类型",
+          type: "checkbox",
+          proName: "listType",
+          arr: ["teacher", "leader", "supervise"],
+          value: {
+            teacher: "教师听课",
+            leader: "领导听课",
+            supervise: "督导听课",
+          },
+        },
+      ],
       componentType: {
         理论课: "Evaluation",
         学生汇报课: "Report",
@@ -87,67 +150,6 @@ export default {
         listType: [],
         "stu-all-number": "",
         "stu-real-number": "",
-        infoList: [
-          [
-            {
-              name: "开课单位",
-              type: "text",
-              proName: "company",
-            },
-            {
-              name: "课程名称",
-              type: "text",
-              proName: "classname",
-            },
-          ],
-          [
-            {
-              name: "开课班号",
-              type: "text",
-              proName: "classid",
-            },
-            {
-              name: "授课教师",
-              type: "text",
-              proName: "teacher",
-            },
-          ],
-          [
-            {
-              name: "听课时间",
-              type: "datetime-local",
-              proName: "classtime",
-            },
-            {
-              name: "地点",
-              type: "text",
-              proName: "classroom",
-            },
-          ],
-          [
-            {
-              name: "学生应到人数",
-              type: "number",
-              proName: "stu-all-number",
-            },
-            {
-              name: "学生实到人数",
-              type: "number",
-              proName: "stu-real-number",
-            },
-          ],
-          {
-            name: "听课类型",
-            type: "checkbox",
-            proName: "listType",
-            arr: ["teacher", "leader", "supervise"],
-            value: {
-              teacher: "教师听课",
-              leader: "领导听课",
-              supervise: "督导听课",
-            },
-          },
-        ],
       },
       evaluationData: {
         evaluation: {
@@ -719,11 +721,16 @@ export default {
       console.log(this.envir);
     },
     uploadRecordToServer: function() {
-      console.log(this.evaluationData);
+      console.log(
+        this.infoData,
+        this.followUpData,
+        this.evaluationData,
+        this.overallData
+      );
     },
     updateClassType: function(e) {
       const type = e.target.value;
-      const infoList = this.infoData.infoList;
+      const infoList = this.infoList;
       switch (type) {
         case "实验课":
           {

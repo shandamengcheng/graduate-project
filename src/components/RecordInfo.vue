@@ -1,7 +1,7 @@
 <template>
   <div class="base-info">
     <ul>
-      <li v-for="(item, index) in infoData.infoList" :key="index">
+      <li v-for="(item, index) in infoList" :key="index">
         <template v-if="Array.isArray(item)">
           <div v-for="(info, key) in item" :key="key" class="info-row">
             <span>{{ info.name }}: </span>
@@ -46,12 +46,14 @@ export default {
           projectName: "",
           classtype: "",
           listType: [],
-          infoList: [],
           "stu-all-number": 0,
           "stu-real-number": 0,
         };
       },
     },
+    infoList: {
+      type: Array,
+    }
   },
   data() {
     return {

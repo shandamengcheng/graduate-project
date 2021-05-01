@@ -1,7 +1,5 @@
 var mysql = require("mysql");
-// var express = require("express");
 var cors = require("cors");
-// var app = express();
 var bodyParser = require("body-parser");
 
 var connection = mysql.createConnection({
@@ -13,37 +11,11 @@ var connection = mysql.createConnection({
 });
 connection.connect();
 
-// app.post("/", (req, res, next) => {
-//   // connection.query("SELECT * from class_info", function(error, result) {
-//   //   console.log("The solution is: ", result);
-//   // });
-//   res.send("数据返回");
-// });
-
-// app.listen(8080, function() {
-//   console.log("CORS-enabled web server listening on port 8000");
-// });
-
 var express = require("express");
 var app = express();
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
-//  主页输出 "Hello World"
-// app.get("/", function(req, res) {
-//   console.log("主页 GET 请求");
-//   // connection.query("SELECT * from class_info", function(error, result) {
-//   //   console.log("The solution is: ", result);
-//   // });
-//   res.send("Hello GET");
-// });
-
-//  POST 请求
-// app.post("/", function(req, res) {
-//   console.log("主页 POST 请求");
-//   res.send("Hello POST");
-// });
 
 app.post("/login", function(req, res) {
   connection.query("SELECT * from teacher_info", function(error, result) {
@@ -59,52 +31,88 @@ app.post("/login", function(req, res) {
 });
 
 // 开课单位
-app.post("/search:unit", function(req, res) {
+app.post("/search/unit", function(req, res) {
   let body = req.body;
-  console.log(body)
-  connection.query("SELECT * from class_info where Class_starting_unit = ?", body.keyWord, function(error, result) {
-    console.log(result);
-    res.send(result);
-  });
+  console.log(body);
+  connection.query(
+    "SELECT * from class_info where Class_starting_unit = ?",
+    body.keyWord,
+    function(error, result) {
+      console.log(result);
+      res.send(result);
+    }
+  );
 });
 // 教师
-app.post("/search:teacher", function(req, res) {
+app.post("/search/teacher", function(req, res) {
   let body = req.body;
-  connection.query("SELECT * from class_info where Class_teacher = ?", body.keyWord, function(error, result) {
-    res.send(result);
-  });
+  console.log(body);
+  connection.query(
+    "SELECT * from class_info where Class_teacher = ?",
+    body.keyWord,
+    function(error, result) {
+      res.send(result);
+    }
+  );
 });
 // 教室
-app.post("/search:room", function(req, res) {
+app.post("/search/room", function(req, res) {
   let body = req.body;
-  connection.query("SELECT * from class_info where Class_room = ?", body.keyWord, function(error, result) {
-    res.send(result);
-  });
+  console.log(body);
+  connection.query(
+    "SELECT * from class_info where Class_room = ?",
+    body.keyWord,
+    function(error, result) {
+      res.send(result);
+    }
+  );
 });
 // 课程名
-app.post("/search:name", function(req, res) {
+app.post("/search/name", function(req, res) {
   let body = req.body;
-  connection.query("SELECT * from class_info where Class_name = ?", body.keyWord, function(error, result) {
-    res.send(result);
-  });
+  console.log(body);
+  connection.query(
+    "SELECT * from class_info where Class_name = ?",
+    body.keyWord,
+    function(error, result) {
+      res.send(result);
+    }
+  );
 });
 
-//  /del_user 页面响应
-app.get("/del_user", function(req, res) {
-  console.log("/del_user 响应 DELETE 请求");
-  res.send("删除页面");
-});
-
-//  /list_user 页面 GET 请求
-app.get("/list_user", function(req, res) {
-  console.log("/list_user GET 请求");
-  res.send("用户列表页面");
-});
-
-// 对页面 abcd, abxcd, ab123cd, 等响应 GET 请求
-app.get("/ab*cd", function(req, res) {
-  console.log("/ab*cd GET 请求");
-  res.send("正则匹配");
+app.post("/plan", function(req, res) {
+  let body = req.body;
+  connection.query(
+    "SELECT * from plan_info where Class_id = ?",
+    body.Class_id,
+    function(error, result) {
+      console.log({ result });
+      if (result.length > 0) {
+        res.send("当前计划已存在！");
+      } else {
+        connection.query(
+          "INSERT INTO plan_info (Plan_id, Class_id, Class_name, Class_teacher, Class_room, Class_time, Class_starting_unit, Class_type, Academic_year) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+          [
+            Math.random()
+              .toString()
+              .slice(-6),
+            body.Class_id,
+            body.Class_name,
+            body.Class_teacher,
+            body.Class_room,
+            body.Class_time,
+            body.Class_starting_unit,
+            body.Class_type,
+            body.Academic_year,
+          ],
+          function(error, result) {
+            console.log({ result1: result });
+            res.send("添加计划成功！");
+          }
+        );
+      }
+    }
+  );
 });
 
 var server = app.listen(8000, function() {

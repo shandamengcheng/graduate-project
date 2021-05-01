@@ -78,7 +78,7 @@ export default {
       let searchId = values[this.searchChoice].split("_").reverse()[0];
       this.$axios({
         method: "post",
-        url: `http://localhost:8000/search:${searchId}`,
+        url: `http://localhost:8000/search/${searchId}`,
         data: {
           key: values[this.searchChoice],
           keyWord: this.searchKeywords,
