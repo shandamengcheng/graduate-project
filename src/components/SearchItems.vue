@@ -22,7 +22,7 @@ export default {
       const Teacher_ID = this.$store.getters.getTeacherInfo.Teacher_ID;
       this.$axios({
         method: "post",
-        url: "http://localhost:8000/plan",
+        url: "http://localhost:8000/myplan",
         data: { ...info, Teacher_ID },
       }).then((res) => {
         alert(res.data);

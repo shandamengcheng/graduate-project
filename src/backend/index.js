@@ -17,6 +17,12 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+var server = app.listen(8000, function() {
+  var host = server.address().address;
+  var port = server.address().port;
+  console.log("应用实例，访问地址为 http://%s:%s", host, port);
+});
+
 app.post("/login", function(req, res) {
   let body = req.body;
   connection.query(
@@ -31,16 +37,13 @@ app.post("/login", function(req, res) {
     }
   );
 });
-
 // 开课单位
 app.post("/search/unit", function(req, res) {
   let body = req.body;
-  console.log(body);
   connection.query(
     "SELECT * from class_info where Class_starting_unit = ?",
     body.keyWord,
     function(error, result) {
-      console.log(result);
       res.send(result);
     }
   );
@@ -82,7 +85,7 @@ app.post("/search/name", function(req, res) {
   );
 });
 
-app.post("/plan", function(req, res) {
+app.post("/myplan", function(req, res) {
   let body = req.body;
   connection.query(
     "SELECT * from plan_info where Class_id = ?",
@@ -106,7 +109,6 @@ app.post("/plan", function(req, res) {
             body.Academic_year,
           ],
           function(error, result) {
-            console.log({ result1: result });
             res.send("添加计划成功！");
           }
         );
@@ -115,9 +117,35 @@ app.post("/plan", function(req, res) {
   );
 });
 
-var server = app.listen(8000, function() {
-  var host = server.address().address;
-  var port = server.address().port;
+app.post("/year", function(req, res) {
+  let body = req.body;
+  console.log({ body });
+  if (!body.isFile) {
+    connection.query(
+      "INSERT INTO report_info (Teacher_ID, isFile, generData, Academic_year, shortcomings, main_experience, improvements) VALUES (?, ?, ?, ?, ?, ?, ?)",
+      [
+        body.Teacher_ID,
+        body.isFile,
+        JSON.stringify(body.generData),
+        body.Academic_year,
+        body.shortcomings,
+        body.main_experience,
+        body.improvements,
+      ],
+      function(error, result) {
+        res.send("添加成功！");
+      }
+    );
+  }
+});
 
-  console.log("应用实例，访问地址为 http://%s:%s", host, port);
+app.post("/plan", function(req, res) {
+  let body = req.body;
+  connection.query(
+    "SELECT * from plan_info where Teacher_id = ?",
+    body.Teacher_ID,
+    function(error, result) {
+      res.send(result);
+    }
+  );
 });

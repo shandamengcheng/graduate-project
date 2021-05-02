@@ -3,9 +3,7 @@
     <SideBar @changeView="navigationToView" />
     <div class="main">
       <NavigationBar />
-      <keep-alive>
         <router-view />
-      </keep-alive>
     </div>
   </div>
 </template>
@@ -36,9 +34,6 @@ export default {
       this.$router.push(`/home/${path}`);
     },
   },
-  mounted() {
-    console.log({ info: this.$store.getters.getTeacherInfo})
-  }
 };
 </script>
 

@@ -1,12 +1,11 @@
 <template>
   <div class="report">
-    <!-- <div class="mask"></div> -->
     <div
       class="report-sheet common"
       :class="{ active: !isShowPreview }"
       id="print-area"
     >
-      <Print />
+      <Print ref="printChild" />
     </div>
     <div class="preview common" :class="{ active: isShowPreview }">
       <progress
@@ -32,6 +31,7 @@
       <button @click="printSheet" title="点击进行模板填写并支持原生打印">
         下载模板
       </button>
+      <button @click="uploadReport">上传数据</button>
       <button>上传报告</button>
       <input type="file" class="upload-file" @change="uploadFile" />
     </div>
@@ -116,7 +116,6 @@ export default {
       this.isShowPreview = false;
       const file = e.currentTarget.files[0];
       if (file) {
-        console.log({ file });
         if (file.type == "application/pdf") {
           isPDF = true;
           this.isNotPreviewImage = true;
@@ -129,6 +128,13 @@ export default {
           } else {
             console.error(`${file.type}是不支持的类型。`);
           }
+          // this.$axios({
+          //   method: "post",
+          //   url: "http://localhost:8000/year",
+          //   data: {
+          //     file,
+          //   }
+          // })
         }
         processFile(file);
       }
@@ -137,7 +143,11 @@ export default {
     printSheet: function() {
       this.isShowPreview = true;
       const prtContent = document.querySelector("#print-area");
-      const WinPrint = window.open("", "mywindow", "status=1,width=800,height=800");
+      const WinPrint = window.open(
+        "",
+        "mywindow",
+        "status=1,width=800,height=800"
+      );
       WinPrint.document.write("<html><head><title>Print</title>");
       WinPrint.document.write(`<style>
       h1 {
@@ -181,12 +191,13 @@ export default {
       .second-line input {
         width: 22%;
       }
-      .thrid-line div,
-      .forth-line div,
-      .fifth-line div {
+      .thrid-line textarea,
+      .forth-line textarea,
+      .fifth-line textarea {
         padding: 0px 5px;
         width: 88%;
         height: 100%;
+        display: block;
         border: 1px solid black;
         text-align: left;
       }
@@ -197,6 +208,33 @@ export default {
       WinPrint.window.onload = function() {
         alert("填写完毕后，可以通过ctrl + P 进行打印");
       };
+    },
+    uploadReport() {
+      const data = this.$refs.printChild;
+      const Teacher_ID = this.$store.getters.getTeacherInfo.Teacher_ID;
+      console.log({ data });
+      this.$axios({
+        method: "post",
+        url: "http://localhost:8000/year",
+        data: {
+          isFile: false,
+          Teacher_ID,
+          generData: data.realationInfo,
+          Academic_year: data.year,
+          shortcomings: data.shortcoming,
+          main_experience: data.main_experience,
+          improvements: data.improvements,
+        },
+      }).then((res) => {
+        if (res.data == "添加成功！") {
+          alert(res.data);
+          data.year = data.shortcoming = data.main_experience = data.improvements =
+            "";
+          for (let key of Object.keys(data.realationInfo)) {
+            data.realationInfo[key] = "";
+          }
+        }
+      });
     },
   },
 };
