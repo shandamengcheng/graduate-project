@@ -18,16 +18,18 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.post("/login", function(req, res) {
-  connection.query("SELECT * from teacher_info", function(error, result) {
-    let admin = false;
-    let body = req.body;
-    admin = result.some((val, index, result) => {
-      return (
-        val.user_name == body.Login_name && val.user_pwd == body.Login_password
-      );
-    });
-    res.send(admin);
-  });
+  let body = req.body;
+  connection.query(
+    "SELECT * from teacher_info where Login_name = ? and Login_password = ?",
+    [body.username, body.password],
+    function(error, result) {
+      if (result.length == 0) {
+        res.send({ result: "用户不存在", teacher_info: {} });
+      } else {
+        res.send({ result: "验证成功！", teacher_info: result[0] });
+      }
+    }
+  );
 });
 
 // 开课单位
@@ -91,11 +93,9 @@ app.post("/plan", function(req, res) {
         res.send("当前计划已存在！");
       } else {
         connection.query(
-          "INSERT INTO plan_info (Plan_id, Class_id, Class_name, Class_teacher, Class_room, Class_time, Class_starting_unit, Class_type, Academic_year) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+          "INSERT INTO plan_info (Teacher_id, Class_id, Class_name, Class_teacher, Class_room, Class_time, Class_starting_unit, Class_type, Academic_year) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
           [
-            Math.random()
-              .toString()
-              .slice(-6),
+            body.Teacher_ID,
             body.Class_id,
             body.Class_name,
             body.Class_teacher,

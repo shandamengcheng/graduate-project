@@ -19,15 +19,16 @@ export default {
   },
   methods: {
     addToMyPlan: function(info) {
+      const Teacher_ID = this.$store.getters.getTeacherInfo.Teacher_ID;
       this.$axios({
         method: "post",
         url: "http://localhost:8000/plan",
-        data: {...info},
-      }).then(res => {
-        console.log(res);
-      })
-    }
-  }
+        data: { ...info, Teacher_ID },
+      }).then((res) => {
+        alert(res.data);
+      });
+    },
+  },
 };
 </script>
 

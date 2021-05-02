@@ -46,20 +46,23 @@ export default {
         return;
       }
       let instance = this;
-      instance.$axios({
-        method: "post",
-        url: "http://localhost:8000/login",
-        data: {
-          password: this.password,
-          username: this.username,
-        },
-      }).then(function(response) {
-        if (response.data == true) {
-          instance.$router.push("./home");
-        } else {
-          alert("用户名或密码错误");
-        }
-      });
+      instance
+        .$axios({
+          method: "post",
+          url: "http://localhost:8000/login",
+          data: {
+            password: this.password,
+            username: this.username,
+          },
+        })
+        .then(function(response) {
+          let { result, teacher_info } = response.data;
+          if (result == "验证成功！") {
+            instance.$router.push("./home");
+            instance.$store.commit("setTeacherInfo", teacher_info);
+          }
+          alert(result);
+        });
     },
   },
 };

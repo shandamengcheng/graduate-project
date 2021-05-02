@@ -36,6 +36,9 @@ export default {
       this.$router.push(`/home/${path}`);
     },
   },
+  mounted() {
+    console.log({ info: this.$store.getters.getTeacherInfo})
+  }
 };
 </script>
 
@@ -45,8 +48,6 @@ export default {
   width: 100%;
   display: flex;
   flex-direction: row;
-  /* background-color: #2d3a4b;
-    color: white; */
   overflow: hidden;
   position: relative;
   z-index: 0;
