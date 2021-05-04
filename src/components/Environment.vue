@@ -1,12 +1,15 @@
 <template>
   <div class="environment">
-    <textarea @input="updataEval"></textarea>
+    <textarea @input="updataEval" :value="content"></textarea>
   </div>
 </template>
 
 <script>
 export default {
   name: 'Environment',
+  props: {
+    content: '',
+  },
   methods: {
     updataEval: function(e) {
       this.$emit('updateText', e.target.value);

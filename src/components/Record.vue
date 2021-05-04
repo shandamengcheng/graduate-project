@@ -22,6 +22,7 @@
           slot="environment"
           v-if="infoData.classtype !== '实验课'"
           @updateText="updateEnvir"
+          :content="envir"
         />
 
         <Evaluation
@@ -68,6 +69,7 @@ export default {
   name: "Record",
   data() {
     return {
+      // 环境评价
       envir: "",
       infoList: [
         [
@@ -151,6 +153,7 @@ export default {
         "stu-all-number": "",
         "stu-real-number": "",
       },
+      // 课程类型的数据，根据课程的类型判断
       evaluationData: {
         evaluation: {
           atti1: "",
@@ -718,18 +721,51 @@ export default {
   methods: {
     updateEnvir: function(value) {
       this.envir = value;
-      console.log(this.envir);
     },
     uploadRecordToServer: function() {
-      console.log(
-        this.infoData,
-        this.followUpData,
-        this.evaluationData,
-        this.overallData
-      );
+      const Teacher_ID = this.$store.getters.getTeacherInfo.Teacher_ID;
+      this.$axios({
+        method: "post",
+        url: "http://localhost:8000/report",
+        data: {
+          Teacher_ID,
+          Teacher_name: this.infoData.teacher,
+          Course_name: this.infoData.classname,
+          envir: this.envir,
+          evaluationData: this.evaluationData[
+            this.componentType[this.infoData.classtype].toLowerCase()
+          ],
+          overallData: this.overallData,
+          followUpData: this.followUpData,
+          Need_follow_assessment:
+            this.overallData.needImprove === "需要跟进" &&
+            this.overallData.otherAdvice.trim() !== "",
+          Academic_year: "2020-2021",
+        },
+      }).then((res) => {
+        if (res.data == "提交成功") {
+          this.envir = "";
+          for (let key of Object.keys(this.infoData)) {
+            this.infoData[key] = "";
+          }
+          for (let key of Object.keys(this.overallData)) {
+            this.overallData[key] = "";
+          }
+          for (let key of Object.keys(this.followUpData)) {
+            this.followUpData[key] = "";
+          }
+          const evaluation = this.evaluationData[
+            this.componentType[this.infoData.classtype].toLowerCase()
+          ];
+          for (let key of Object.keys(evaluation)) {
+            evaluation[key] = "";
+          }
+        }
+      });
     },
     updateClassType: function(e) {
       const type = e.target.value;
+      this.infoData.classtype = type;
       const infoList = this.infoList;
       switch (type) {
         case "实验课":

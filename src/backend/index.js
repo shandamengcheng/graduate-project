@@ -136,6 +136,14 @@ app.post("/year", function(req, res) {
         res.send("添加成功！");
       }
     );
+  } else {
+    connection.query(
+      "INSERT INTO report_info (Teacher_ID, isFile, Academic_year, file) VALUES (?, ?, ?, ?)",
+      [body.Teacher_ID, body.isFile, body.Academic_year, body.file],
+      function(error, result) {
+        res.send("上传成功！");
+      }
+    );
   }
 });
 
@@ -146,6 +154,27 @@ app.post("/plan", function(req, res) {
     body.Teacher_ID,
     function(error, result) {
       res.send(result);
+    }
+  );
+});
+
+app.post("/report", function(req, res) {
+  let body = req.body;
+  connection.query(
+    "INSERT INTO record_info (Teacher_ID, Teacher_name, Course_name, envir, evaluationData, overallData, followUpData, Academic_year, Need_follow_assessment) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+    [
+      body.Teacher_ID,
+      body.Teacher_name,
+      body.Course_name,
+      body.envir,
+      JSON.stringify(body.evaluationData),
+      JSON.stringify(body.overallData),
+      JSON.stringify(body.followUpData),
+      body.Academic_year,
+      body.Need_follow_assessment,
+    ],
+    function(error, result) {
+      console.log({ result });
     }
   );
 });

@@ -137,6 +137,35 @@ export default {
           // })
         }
         processFile(file);
+        const Teacher_ID = this.$store.getters.getTeacherInfo.Teacher_ID;
+        console.log(isPDF, new Blob([file], { type: "application/pdf" }));
+        // const formData = new FormData();
+        // formData.append("Teacher_ID", Teacher_ID);
+        // formData.append("isFile", true);
+        // formData.append("Academic_year", "2020-2021");
+        // formData.append(
+        //   "file",
+        //   !isPDF
+        //     ? new Blob([file], { type: "image/png" })
+        //     : new Blob([file], { type: "application/pdf" })
+        // );
+
+        this.$axios({
+          method: "post",
+          url: "http://localhost:8000/year",
+          // data: formData,
+          data: {
+            Teacher_ID,
+            isFile: true,
+            Academic_year: "2020-2021",
+            file: !isPDF
+              ? new Blob([file], { type: "image/png" })
+              : new Blob([file], { type: "application/pdf" }),
+            // file: '0x01020304FFFFFFFF0000000CAACB0000'
+          },
+        }).then((res) => {
+          alert(res.data);
+        });
       }
     },
 
